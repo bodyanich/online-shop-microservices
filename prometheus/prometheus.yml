@@ -1,0 +1,36 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'online-shop-microservices'
+    environment: 'development'
+
+scrape_configs:
+  # Product Service
+  - job_name: 'product-service'
+    static_configs:
+      - targets: ['product-service:8000']
+        labels:
+          service: 'product-service'
+    metrics_path: '/metrics'
+
+  # Order Service
+  - job_name: 'order-service'
+    static_configs:
+      - targets: ['order-service:8000']
+        labels:
+          service: 'order-service'
+    metrics_path: '/metrics'
+
+  # Notification Service
+  - job_name: 'notification-service'
+    static_configs:
+      - targets: ['notification-service:8000']
+        labels:
+          service: 'notification-service'
+    metrics_path: '/metrics'
+
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
