@@ -16,8 +16,11 @@ export const options = {
   },
 };
 
-const BASE_PRODUCT_URL = 'http://localhost:8001';
-const BASE_ORDER_URL = 'http://localhost:8002';
+//const BASE_PRODUCT_URL = 'http://localhost:8001';
+//const BASE_ORDER_URL = 'http://localhost:8002';
+
+const BASE_PRODUCT_URL = 'http://host.docker.internal:8001';
+const BASE_ORDER_URL = 'http://host.docker.internal:8002';
 
 // Test data
 let testProductId = null;
