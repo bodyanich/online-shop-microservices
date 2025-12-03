@@ -120,7 +120,7 @@ volumes:
 
 ## 5. Кінцевий вигляд файлу
 
-```json
+```yaml
 version: '3.8'
 
 services:
