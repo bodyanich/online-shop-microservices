@@ -26,7 +26,7 @@ const BASE_ORDER_URL = 'http://host.docker.internal:8002';
 let testProductId = null;
 
 export function setup() {
-  console.log('🚀 Starting Smoke Test Setup...');
+  console.log('Starting Smoke Test Setup...');
   
   // Create a test product for orders
   const productPayload = JSON.stringify({
@@ -187,7 +187,7 @@ export default function(data) {
 }
 
 export function teardown(data) {
-  console.log('🧹 Cleaning up...');
+  console.log('Cleaning up...');
   
   if (data && data.productId) {
     const deleteRes = http.del(`${BASE_PRODUCT_URL}/products/${data.productId}`);
@@ -196,7 +196,7 @@ export function teardown(data) {
     }
   }
   
-  console.log('✅ Smoke Test completed!');
+  console.log('Smoke Test completed!');
 }
 
 export function handleSummary(data) {
@@ -209,7 +209,7 @@ function textSummary(data, options) {
   const indent = options.indent || '';
   const enableColors = options.enableColors || false;
   
-  let summary = '\n' + indent + '📊 Smoke Test Summary\n';
+  let summary = '\n' + indent + 'Smoke Test Summary\n';
   summary += indent + '═'.repeat(50) + '\n\n';
   
   // Overall statistics

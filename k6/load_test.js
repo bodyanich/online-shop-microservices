@@ -38,13 +38,12 @@ export const options = {
 const BASE_PRODUCT_URL = 'http://host.docker.internal:8001';
 const BASE_ORDER_URL = 'http://host.docker.internal:8002';
 
-
 // Test data
 const categories = ['Electronics', 'Accessories', 'Audio', 'Computing'];
 let testProducts = [];
 
 export function setup() {
-  console.log('🚀 Starting Load Test Setup...');
+  console.log('Starting Load Test Setup...');
   console.log('Creating test products...');
   
   const products = [];
@@ -76,7 +75,7 @@ export function setup() {
     sleep(0.1);
   }
   
-  console.log(`✅ Setup complete: ${products.length} products created`);
+  console.log(`Setup complete: ${products.length} products created`);
   return { productIds: products };
 }
 
@@ -302,7 +301,7 @@ function mixedWorkflow(productIds) {
 }
 
 export function teardown(data) {
-  console.log('\n🧹 Cleaning up test data...');
+  console.log('\nCleaning up test data...');
   
   if (data && data.productIds) {
     let deleted = 0;
@@ -316,20 +315,20 @@ export function teardown(data) {
     console.log(`✓ Deleted ${deleted}/${data.productIds.length} test products`);
   }
   
-  console.log('✅ Load Test completed!');
+  console.log('Load Test completed!');
 }
 
 export function handleSummary(data) {
   console.log('\n' + '═'.repeat(70));
-  console.log('📊 LOAD TEST SUMMARY REPORT');
+  console.log('LOAD TEST SUMMARY REPORT');
   console.log('═'.repeat(70) + '\n');
   
   // Test duration
   const duration = (data.state.testRunDurationMs / 1000).toFixed(2);
-  console.log(`⏱️  Test Duration: ${duration} seconds\n`);
+  console.log(`Test Duration: ${duration} seconds\n`);
   
   // Overall statistics
-  console.log('📈 Overall Statistics:');
+  console.log('Overall Statistics:');
   console.log(`   Total HTTP Requests: ${data.metrics.http_reqs.values.count}`);
   console.log(`   Request Rate: ${data.metrics.http_reqs.values.rate.toFixed(2)} req/s`);
   console.log(`   Failed Requests: ${data.metrics.http_req_failed.values.passes || 0} (${(data.metrics.http_req_failed.values.rate * 100).toFixed(2)}%)`);
@@ -337,7 +336,7 @@ export function handleSummary(data) {
   console.log(`   Failed Orders: ${data.metrics.failed_orders?.values.count || 0}\n`);
   
   // Response times
-  console.log('⚡ Response Times (HTTP Requests):');
+  console.log('Response Times (HTTP Requests):');
   console.log(`   Average: ${data.metrics.http_req_duration.values.avg.toFixed(2)}ms`);
   console.log(`   Median:  ${data.metrics.http_req_duration.values.med.toFixed(2)}ms`);
   console.log(`   90th:    ${data.metrics.http_req_duration.values['p(90)'].toFixed(2)}ms`);
@@ -347,31 +346,31 @@ export function handleSummary(data) {
   
   // Custom metrics
   if (data.metrics.order_creation_duration) {
-    console.log('🛒 Order Creation Times:');
+    console.log('Order Creation Times:');
     console.log(`   Average: ${data.metrics.order_creation_duration.values.avg.toFixed(2)}ms`);
     console.log(`   95th:    ${data.metrics.order_creation_duration.values['p(95)'].toFixed(2)}ms`);
     console.log(`   99th:    ${data.metrics.order_creation_duration.values['p(99)'].toFixed(2)}ms\n`);
   }
   
   if (data.metrics.product_fetch_duration) {
-    console.log('📦 Product Fetch Times:');
+    console.log('Product Fetch Times:');
     console.log(`   Average: ${data.metrics.product_fetch_duration.values.avg.toFixed(2)}ms`);
     console.log(`   95th:    ${data.metrics.product_fetch_duration.values['p(95)'].toFixed(2)}ms\n`);
   }
   
   if (data.metrics.stock_check_duration) {
-    console.log('✅ Stock Check Times:');
+    console.log('Stock Check Times:');
     console.log(`   Average: ${data.metrics.stock_check_duration.values.avg.toFixed(2)}ms`);
     console.log(`   95th:    ${data.metrics.stock_check_duration.values['p(95)'].toFixed(2)}ms\n`);
   }
   
   // Virtual Users
-  console.log('👥 Virtual Users:');
+  console.log('Virtual Users:');
   console.log(`   Max VUs: ${data.metrics.vus_max.values.max}`);
   console.log(`   Avg VUs: ${data.metrics.vus.values.value.toFixed(2)}\n`);
   
   // Thresholds
-  console.log('🎯 Thresholds:');
+  console.log('Thresholds:');
   let allPassed = true;
   for (const [name, threshold] of Object.entries(data.thresholds)) {
     const status = threshold.ok ? '✓ PASS' : '✗ FAIL';
@@ -382,9 +381,9 @@ export function handleSummary(data) {
   
   console.log('\n' + '═'.repeat(70));
   if (allPassed) {
-    console.log('✅ All thresholds passed! System is performing well under load.');
+    console.log('All thresholds passed! System is performing well under load.');
   } else {
-    console.log('⚠️  Some thresholds failed. Review the metrics above.');
+    console.log('Some thresholds failed. Review the metrics above.');
   }
   console.log('═'.repeat(70) + '\n');
   
