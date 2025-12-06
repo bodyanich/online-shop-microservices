@@ -192,6 +192,9 @@ rate(http_requests_total[1m])
 rate(http_request_duration_seconds_sum[5m]) / rate(http_request_duration_seconds_count[5m])
 ```
 
+![Diagram](images/2.png)
+![Diagram](images/22.png)
+
 **3. Error rate (5xx помилки):**
 ```promql
 rate(http_requests_total{status=~"5.."}[1m])
@@ -202,10 +205,15 @@ rate(http_requests_total{status=~"5.."}[1m])
 histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))
 ```
 
+![Diagram](images/4.png)
+![Diagram](images/44.png)
+
 **5. Requests by endpoint:**
 ```promql
 sum by(path) (rate(http_requests_total[5m]))
 ```
+
+![Diagram](images/5.png)
 
 ---
 
@@ -252,6 +260,8 @@ sum(rate(http_requests_total[1m])) by (service)
 - **Тип:** Graph (Time series)
 - **Відображає:** Навантаження на кожен сервіс
 
+![Diagram](images/grafana/1.png)
+
 **2. Average Response Time**
 ```promql
 rate(http_request_duration_seconds_sum[5m]) / rate(http_request_duration_seconds_count[5m])
@@ -259,6 +269,8 @@ rate(http_request_duration_seconds_sum[5m]) / rate(http_request_duration_seconds
 - **Тип:** Graph
 - **Unit:** seconds
 - **Відображає:** Середній час відповіді
+
+![Diagram](images/grafana/2.png)
 
 **3. Error Rate**
 ```promql
@@ -275,12 +287,16 @@ sum by(status) (rate(http_requests_total[5m]))
 - **Тип:** Pie chart
 - **Відображає:** Розподіл статус-кодів (200, 201, 404, 500)
 
+![Diagram](images/grafana/4.png)
+
 **5. 95th Percentile Latency**
 ```promql
 histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))
 ```
 - **Тип:** Gauge
 - **Відображає:** 95% запитів швидші за це значення
+
+![Diagram](images/grafana/5.png)
 
 ---
 
